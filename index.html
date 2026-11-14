@@ -78,7 +78,34 @@
 		</div>
 		
 		<h2>Part 2: Bounding Volume Hierarchy</h2>
-		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		<p>I build the BVH by basically splitting up the area by its midpoint. And then each midpoint each side of the midpoint checks if the ray intersects it, and if it does, then it'll check its smaller bounding boxes. Check the intersection using the same plane intersection from the previous question but changes a bit because the planes are not aligned to the axis. Use recursively smaller boxes by calling BVH on the smaller boxes until you get to a box size in which the number of leaves is less than the cap. Check for the nearest intersection and if you find a nearer intersection, overwrite it. The algorithm for splitting is very simple, it's just the midpoint, and then chekcing if the rays interesect either side of the midpoint and if so, continuing on the corresponding side(s).</p>
+
+		<div style="display: flex; flex-direction: column; align-items: center;">
+			<table style="width: 100%; text-align: center; border-collapse: collapse;">
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="assets/CBdragon.png" width="400px"/>
+				  <figcaption>CBdragon.dae</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="assets/CBlucy.png" width="400px"/>
+				  <figcaption>CBlucy.dae</figcaption>
+				</td>
+			  </tr>
+			  <tr>
+				<td style="text-align: center;">
+				  <img src="assets/maxplanck.png" width="400px"/>
+				  <figcaption>maxplanck.dae</figcaption>
+				</td>
+				<td style="text-align: center;">
+				  <img src="assets/wall-e.png" width="400px"/>
+				  <figcaption>wall-e.dae</figcaption>
+				</td>
+			  </tr>
+			</table>
+		</div>
+
+		<p>On triangles of 50k, 100k, 134k, and 240k, the times with BVH stayed around .2 seconds, while without BVH, the times were 21, 53, 69, and 166 seconds correspondingly. This shows the speed-up power of BVH. By using it, and its power of being logarithmic, large increases in triangles barely make a dent in the generation time, because all that matters is the number of triangles seen. It goes from tens of thousands of tests per ray to less than 10, which adds up when checking through all the rays.</p>
 
 		<h2>Part 3: Direct Illumination</h2>
 		Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
